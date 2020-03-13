@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('partials/commonhead.ejs') %>
+</head>
+<body>
+    <div class="body-wrapper h-100">
+        
+        <div class=" text-center h-100">
+            <div class="container-fluild h-100 d-flex align-items-center justify-content-center">
+              <!-- Default form login -->
+        <form class="text-center w-50 mx-auto p-5" action="#!">
+        
+            <h1 class="font-weight-bold my-4">Enter Your Name</h1>
+        
+            <input class="form-control basicAutoComplete" type="text" id= "searchName" name="fltrname">
+              
+            </form>
+        
+        <!-- Default form login -->
+              
+            
+        
+        
+            </div>
+        </div>
+</div>
+<%- include ('partials/commonscripts.ejs') %>
+<script>
+    $(function(){
+  $('#searchName').autocomplete({
+  source: function(req,res){
+    $.ajax({
+      url:"autocomplete/",
+      dataType:"jsonp",
+      type:"GET",
+      data:req,
+      success: function(data){
+        res(data)
+      },
+      error: function(err){
+        console.log(err.status);
+      }
+    });
+  },
+  minLength:1,
+  select: function(event,ui){
+    if(ui.item){
+      $('#searchName').text(ui.item.label);
+    }
+  }
+  });
+    });
+    </script> 
+</body>
+</html>
